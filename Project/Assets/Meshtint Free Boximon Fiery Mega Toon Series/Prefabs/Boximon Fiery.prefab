@@ -1116,8 +1116,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7599292, y: 0.7599292, z: 0.7599292}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4114503819697490}
   - {fileID: 4585977435627606}
@@ -1216,7 +1216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemey: {fileID: 1975194375736644}
-  speed: 1
+  speed: 0.8
 --- !u!1 &1992369794795074
 GameObject:
   m_ObjectHideFlags: 0
