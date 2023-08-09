@@ -1099,6 +1099,8 @@ GameObject:
   - component: {fileID: 2012970250098355210}
   - component: {fileID: 4551211906775136377}
   - component: {fileID: 1689904505828359915}
+  - component: {fileID: 4519614021369345714}
+  - component: {fileID: 4039682500900897971}
   m_Layer: 0
   m_Name: Boximon Fiery
   m_TagString: Untagged
@@ -1210,13 +1212,49 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975194375736644}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 06c767cc15f4d6b43a982a0a3a96810f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemey: {fileID: 1975194375736644}
   speed: 0.8
+--- !u!195 &4519614021369345714
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975194375736644}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 0.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &4039682500900897971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975194375736644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caf1c4c4c5b2cab48afaf8c4a1708ba9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  stoppingDistance: 2
 --- !u!1 &1992369794795074
 GameObject:
   m_ObjectHideFlags: 0
