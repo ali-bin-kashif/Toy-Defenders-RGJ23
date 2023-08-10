@@ -12,13 +12,15 @@ public class EnemyFollow : MonoBehaviour
     {
         navAgent = GetComponent<NavMeshAgent>();
         navAgent.stoppingDistance = stoppingDistance;
-    }
 
-    private void Update()
-    {
         if (player != null)
         {
             navAgent.SetDestination(player.transform.position);
         }
+    }
+
+    private void Update()
+    {
+        
     }
 }
