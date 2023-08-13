@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 466174982370493814}
   - component: {fileID: 466174982370493813}
   - component: {fileID: 466174982370493812}
+  - component: {fileID: 37570764301119077}
   - component: {fileID: 4142579718291170980}
   - component: {fileID: 2889798388756762347}
-  - component: {fileID: -8314472146797989305}
+  - component: {fileID: 2009663317596154941}
   m_Layer: 0
   m_Name: G1_Yellow
   m_TagString: Enemy
@@ -87,6 +88,20 @@ CapsuleCollider:
   m_Height: 1.1666331
   m_Direction: 1
   m_Center: {x: 0.019093513, y: 0.56585956, z: -0.019093275}
+--- !u!114 &37570764301119077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466174982370493815}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06c767cc15f4d6b43a982a0a3a96810f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemey: {fileID: 466174982370493815}
+  speed: 0.8
 --- !u!195 &4142579718291170980
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -121,8 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caf1c4c4c5b2cab48afaf8c4a1708ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stoppingDistance: 2
---- !u!114 &-8314472146797989305
+  stoppingDistance: 1
+--- !u!114 &2009663317596154941
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
