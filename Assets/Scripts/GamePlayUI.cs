@@ -10,15 +10,30 @@ public class GamePlayUI : MonoBehaviour
 
     public Button[] towerCards;
 
+    //Buttons and HUD Game Objects
+    public GameObject coinHUD,pauseBtn;
+
+    //Screens and menus Game Objects
+    public GameObject pauseMenu;
+
+    public Slider progressBar;
+
     public Color disabledColor;
 
     Inventory _playerInventory;
+
+    public EnemySpawner _waveSystem;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
+
+        pauseMenu.SetActive(false);
+
 
         for (int i = 0; i < _playerInventory.toyTowers.Length; i++)
         {
@@ -44,7 +59,8 @@ public class GamePlayUI : MonoBehaviour
     {
         //To update coins value of coin HUD
         coinsText.text = _playerInventory.Coins.ToString();
-        
+
+        progressBar.value = _waveSystem.percentageComplete;
     }
 
     public void UpdateDeckUI(int id)
@@ -76,6 +92,27 @@ public class GamePlayUI : MonoBehaviour
             }
         }
     }
+
+    public void PauseButton()
+    {
+        Time.timeScale = 0;
+        pauseBtn.SetActive(false);
+        coinHUD.SetActive(false);
+        progressBar.gameObject.SetActive(false);
+        pauseMenu.SetActive(true);
+    }
+
+    public void ResumeButton()
+    {
+        Time.timeScale = 1;
+        pauseMenu.SetActive(false);
+        pauseBtn.SetActive(true);
+        coinHUD.SetActive(true);
+        progressBar.gameObject.SetActive(true);
+        
+    }
+
+
 
 
 }

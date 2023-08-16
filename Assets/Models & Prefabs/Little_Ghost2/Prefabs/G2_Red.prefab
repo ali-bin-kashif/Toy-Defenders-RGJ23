@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 564846045962443497}
@@ -46,7 +46,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 25901200661331521}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -84,7 +84,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2083919
+  m_Radius: 0.24
   m_Height: 1.1666331
   m_Direction: 1
   m_Center: {x: 0.019093513, y: 0.56585956, z: -0.019093275}

@@ -10,6 +10,8 @@ public class TowerPlatform : MonoBehaviour
 
     Inventory _playerInventory;
 
+    bool hasTower = false;
+
     void Start()
     {
         _spawnPoint = transform.GetChild(0); //Get the spawn point transform which is child
@@ -19,8 +21,10 @@ public class TowerPlatform : MonoBehaviour
 
     private void OnMouseDown()
     {
-
-        _playerInventory.SummonTower(_spawnPoint);
+        if(!hasTower)
+        {
+            hasTower = _playerInventory.SummonTower(_spawnPoint);
+        } 
     }
 
 

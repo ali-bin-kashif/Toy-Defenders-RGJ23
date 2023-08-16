@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
     public float Health;
     Animator _enemyAnimator;
     Inventory _playerInventory;
+    NavMeshAgent movement;
+    Rigidbody rb;
 
     bool hasDied;
     // Start is called before the first frame update
@@ -14,6 +17,8 @@ public class EnemyScript : MonoBehaviour
     {
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
         _enemyAnimator = GetComponent<Animator>();
+        movement = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -23,11 +28,12 @@ public class EnemyScript : MonoBehaviour
         {
             Health = 0;
             hasDied = true;
+            movement.enabled = false;
             _playerInventory.Coins += 20;
             if(_enemyAnimator != null)
                 _enemyAnimator.SetTrigger("Die");
 
-            Destroy(gameObject,3f);
+            Destroy(gameObject,1f);
 
         }
         
@@ -38,4 +44,5 @@ public class EnemyScript : MonoBehaviour
         Health -= damage;
         _playerInventory.Coins += 5;
     }
+
 }

@@ -7,6 +7,8 @@ public class Tower : MonoBehaviour
     public float towerRange;
     public float Damage;
     public float fireCoolDown;
+    public float shootForce;
+    public bool isMortar;
     float _fireTime;
 
     public Transform turretBarrel;
@@ -34,8 +36,15 @@ public class Tower : MonoBehaviour
             Quaternion lookTarget = Quaternion.LookRotation(dir);
 
             Vector3 rotate = Quaternion.Lerp(turretBarrel.rotation, lookTarget, 15 * Time.deltaTime).eulerAngles;
-
-            turretBarrel.rotation = Quaternion.Euler(rotate.x, rotate.y, 0f);
+            if(isMortar)
+            {
+                turretBarrel.rotation = Quaternion.Euler(-65f, rotate.y, 0f);
+            }
+            else
+            {
+                turretBarrel.rotation = Quaternion.Euler(rotate.x, rotate.y, 0f);
+            }
+            
 
             _fireTime += Time.deltaTime;
             if (_fireTime > fireCoolDown)
@@ -81,7 +90,7 @@ public class Tower : MonoBehaviour
     {
         GameObject bullet = Instantiate(Bullet, firePoint.position, firePoint.rotation);
         bullet.GetComponent<BulletScript>().Damage = Damage;
-        bullet.GetComponent<Rigidbody>().AddForce(firePoint.right * 10,ForceMode.Impulse);
+        bullet.GetComponent<Rigidbody>().AddForce(firePoint.forward * shootForce,ForceMode.Impulse);
     }
 
 

@@ -36,9 +36,12 @@ public class EnemySpawner : MonoBehaviour
     public SpawnState state;
     public bool wavesCompleted;
 
+    public float percentageComplete;
+
     void Start()
     {
         state = SpawnState.COUNTING;
+ 
     }
 
     void Update()
@@ -74,14 +77,19 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnWave(Wave _wave)
     {
+
         state = SpawnState.SPAWNING;
 
         foreach(Enemy enemy in _wave.Enemies)
         {
             for( int i=0 ; i < enemy.enemyCount ; i++)
             {
-                Instantiate(enemy.enemyPrefab, spawnPoint.position, Quaternion.identity);
-                yield return new WaitForSeconds(_wave.spawnDelay);
+                if(wavesCompleted != true)
+                {
+                    Instantiate(enemy.enemyPrefab, spawnPoint.position, Quaternion.identity);
+                    percentageComplete += 2;
+                    yield return new WaitForSeconds(_wave.spawnDelay);
+                }  
             }
                  
         }
@@ -111,17 +119,16 @@ public class EnemySpawner : MonoBehaviour
         //Debug.Log("Wave Completed !");
         if (currentWave >= waves.Length - 1)
         {
-            // Level Completed, all waves done.
-            //Debug.Log(currentWave);
-            //Debug.Log("Level Completed !");
             wavesCompleted = true;
+            percentageComplete = 100;
             state = SpawnState.IDLE;
-            //currentWave = 0;
         }
         else
         {
+            
             currentWave++;
-            waveCountDown = 10;
+            percentageComplete = ((float)currentWave / waves.Length) * 100;
+            waveCountDown = 5;
             state = SpawnState.COUNTING;
         }
 

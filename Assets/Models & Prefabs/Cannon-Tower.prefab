@@ -112,7 +112,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 1.493, y: 0.256, z: -9.04}
-  m_LocalScale: {x: 0.059999995, y: 0.06, z: 0.059999995}
+  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4130383516043951169}
@@ -133,9 +133,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b158dea7cb0c7ab4ba6fb056c2921eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerRange: 3
+  towerRange: 4
   Damage: 50
   fireCoolDown: 3
+  shootForce: 10
   turretBarrel: {fileID: 7091031670619777293}
   firePoint: {fileID: 7652922764779828050}
   Bullet: {fileID: 4665118650591866817, guid: cd1e9729c08225745beee98eb1485fdc, type: 3}
@@ -185,8 +186,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8, y: 16, z: 8}
-  m_Center: {x: 0, y: 7, z: 0}
+  m_Size: {x: 8, y: 9.94, z: 8}
+  m_Center: {x: 0, y: 3.71, z: 0}
 --- !u!1 &2042702885968965248
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,13 +378,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8656156455139079237}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 2.2, z: 5.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7091031670619777293}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8876676625419808033
 GameObject:
   m_ObjectHideFlags: 0

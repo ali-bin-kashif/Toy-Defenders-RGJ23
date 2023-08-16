@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour
 
 
     //Function to spawn tower at platform when tapped
-    public void SummonTower(Transform spawnpoint)
+    public bool SummonTower(Transform spawnpoint)
     {
         ToyTower tower = toyTowers[_selectedTower];
         
@@ -37,8 +37,11 @@ public class Inventory : MonoBehaviour
             Instantiate(tower.towerPrefab, spawnpoint.position, tower.towerPrefab.transform.rotation);
             tower.isPurchased = false;
             gameUI.UpdateDeckUI(_selectedTower);
+            UnselectTowers();
+            return true;
         }
         UnselectTowers();
+        return false;
     }
 
     //Tower selection functions, will be executed when tap on cards
@@ -59,8 +62,7 @@ public class Inventory : MonoBehaviour
                 tower.isSelected = true;
             }
                 
-        }
-        
+        }  
 
     }
 
@@ -78,6 +80,26 @@ public class Inventory : MonoBehaviour
             else
             {
                 _selectedTower = 1;
+                tower.isSelected = true;
+            }
+
+        }
+    }
+
+    public void SelectMortar()
+    {
+        UnselectTowers();
+        ToyTower tower = toyTowers[2];
+        if (tower.isUnlocked)
+        {
+            if (!tower.isPurchased && Coins >= 500)
+            {
+                tower.isPurchased = true;
+                Coins -= 500;
+            }
+            else
+            {
+                _selectedTower = 2;
                 tower.isSelected = true;
             }
 
