@@ -32,6 +32,7 @@ public class GameLoss : MonoBehaviour
             if(!gameEnded)
             {
                 gameEnded = true;
+                _waveSystem.isLevelWon = false;
                 _waveSystem.wavesCompleted = true;
                 _waveSystem.state = EnemySpawner.SpawnState.IDLE;
 
@@ -48,7 +49,7 @@ public class GameLoss : MonoBehaviour
                     Destroy(enemy.gameObject);
                 }
 
-                Instantiate(DeathEffect, EffectPosition.position, Quaternion.identity);
+                Instantiate(DeathEffect, EffectPosition.position, DeathEffect.transform.rotation);
 
                 kidAnimation.SetTrigger("WakeUp");
             }

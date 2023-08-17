@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GamePlayUI : MonoBehaviour
 {
-    public TextMeshProUGUI coinsText;
+    public TextMeshProUGUI coinsText, bonusCoins;
 
     public Button[] towerCards;
 
@@ -14,27 +15,32 @@ public class GamePlayUI : MonoBehaviour
     public GameObject coinHUD,pauseBtn;
 
     //Screens and menus Game Objects
-    public GameObject pauseMenu;
+    public GameObject pauseMenu, winMenu, lossMenu;
 
     public Slider progressBar;
 
     public Color disabledColor;
 
-    Inventory _playerInventory;
+    public Animator Deck;
 
     public EnemySpawner _waveSystem;
 
+    Inventory _playerInventory;
 
+    bool runOnce;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
 
         pauseMenu.SetActive(false);
+        winMenu.SetActive(false);
+        lossMenu.SetActive(false);
 
-
+        //Setting the UI of deck according to the inventory and available towers
         for (int i = 0; i < _playerInventory.toyTowers.Length; i++)
         {
             if (_playerInventory.toyTowers[i].isUnlocked)
@@ -61,6 +67,19 @@ public class GamePlayUI : MonoBehaviour
         coinsText.text = _playerInventory.Coins.ToString();
 
         progressBar.value = _waveSystem.percentageComplete;
+
+
+        //Enabling Win and loss menu after level end
+        if (_waveSystem.wavesCompleted && _waveSystem.isLevelWon && !runOnce) //Game win condition
+        {
+            StartCoroutine(GameWin());
+            runOnce = true;
+        }
+        else if (_waveSystem.wavesCompleted && !_waveSystem.isLevelWon && !runOnce) //Game loss condition
+        {
+            StartCoroutine(GameLost());
+            runOnce = true;
+        }
     }
 
     public void UpdateDeckUI(int id)
@@ -91,6 +110,7 @@ public class GamePlayUI : MonoBehaviour
                 towerCards[id].GetComponent<Animator>().SetBool("isSelected", false);
             }
         }
+
     }
 
     public void PauseButton()
@@ -110,6 +130,41 @@ public class GamePlayUI : MonoBehaviour
         coinHUD.SetActive(true);
         progressBar.gameObject.SetActive(true);
         
+    }
+
+    public void RetryButton()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index);
+    }
+
+    public void GoToScene(int index)
+    {
+        SceneManager.LoadScene(index);
+    }
+
+    IEnumerator GameLost()
+    {
+        pauseBtn.SetActive(false);
+        coinHUD.SetActive(false);
+        progressBar.gameObject.SetActive(false);
+        Deck.SetTrigger("DeckEnd");
+        yield return new WaitForSeconds(1f);
+        Deck.gameObject.SetActive(false);
+        lossMenu.SetActive(true);
+    }
+
+    IEnumerator GameWin()
+    {
+        pauseBtn.SetActive(false);
+        coinHUD.SetActive(false);
+        progressBar.GetComponent<Animator>().SetTrigger("Win");
+        Deck.SetTrigger("DeckEnd");
+        yield return new WaitForSeconds(3f);
+        bonusCoins.text = _playerInventory.Coins.ToString();
+        progressBar.gameObject.SetActive(false);
+        Deck.gameObject.SetActive(false);
+        winMenu.SetActive(true);
     }
 
 

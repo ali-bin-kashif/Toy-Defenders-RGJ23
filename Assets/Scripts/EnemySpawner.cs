@@ -35,6 +35,7 @@ public class EnemySpawner : MonoBehaviour
 
     public SpawnState state;
     public bool wavesCompleted;
+    public bool isLevelWon;
 
     public float percentageComplete;
 
@@ -120,6 +121,7 @@ public class EnemySpawner : MonoBehaviour
         if (currentWave >= waves.Length - 1)
         {
             wavesCompleted = true;
+            isLevelWon = true;
             percentageComplete = 100;
             state = SpawnState.IDLE;
         }

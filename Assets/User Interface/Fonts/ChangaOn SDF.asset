@@ -168,9 +168,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: ChangaOn SDF
   m_EditorClassIdentifier: 
-  hashCode: 1340894592
+  hashCode: -313739598
   material: {fileID: -2567860149962933641}
-  materialHashCode: -1635137248
+  materialHashCode: 893462866
   m_Version: 1.1.0
   m_SourceFontFileGUID: de52b8ec1c03db641b01517ccd826089
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: de52b8ec1c03db641b01517ccd826089,
