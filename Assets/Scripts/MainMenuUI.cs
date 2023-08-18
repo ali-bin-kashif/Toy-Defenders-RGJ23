@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
@@ -9,23 +10,27 @@ public class MainMenuUI : MonoBehaviour
     public GameObject LevelSelectPanel;
     public GameObject SettingPanel;
     public GameObject InfoPanel;
-    //public GameObject ShopPanel;
+    public GameObject ShopPanel;
+
+    public TextMeshProUGUI coinsHUD;
+
+    public int Coins;
 
     // Start is called before the first frame update
     void Start()
     {
+        Coins = PlayerPrefs.GetInt("Coins", 1000);
+        coinsHUD.text = Coins.ToString();
+
+        Time.timeScale = 1;
         MainMenuPanel.SetActive(true);
         LevelSelectPanel.SetActive(false);
         SettingPanel.SetActive(false);
         InfoPanel.SetActive(false);
-        //ShopPanel.SetActive(false);
+        ShopPanel.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 
     public void PlayButton()
     {
@@ -33,25 +38,31 @@ public class MainMenuUI : MonoBehaviour
         LevelSelectPanel.SetActive(true);
     }
 
-   /* public void ShopButton()
+    public void ShopButton()
     {
         ShopPanel.SetActive(true);
-    }*/
+        InfoPanel.SetActive(false);
+        SettingPanel.SetActive(false);
+    }
 
     public void InfoButton()
     {
         InfoPanel.SetActive(true);
+        ShopPanel.SetActive(false);
+        SettingPanel.SetActive(false);
     }
 
     public void SettingButton()
     {
         SettingPanel.SetActive(true);
+        ShopPanel.SetActive(false);
+        InfoPanel.SetActive(false);
     }
 
     public void CloseButton()
     {
         SettingPanel.SetActive(false);
-        //ShopPanel.SetActive(false);
+        ShopPanel.SetActive(false);
         InfoPanel.SetActive(false);
     }
 
