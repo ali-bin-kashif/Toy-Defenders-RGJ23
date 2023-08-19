@@ -43,13 +43,22 @@ public class GamePlayUI : MonoBehaviour
         //Setting the UI of deck according to the inventory and available towers
         for (int i = 0; i < _playerInventory.toyTowers.Length; i++)
         {
-            if (_playerInventory.toyTowers[i].isUnlocked)
+            ToyTower tower = _playerInventory.toyTowers[i];
+            if (tower.isUnlocked)
             {
                 towerCards[i].interactable = true;
-                if(!_playerInventory.toyTowers[i].isPurchased)
+                if(!tower.isPurchased)
                 {
-                    towerCards[i].transform.GetChild(0).gameObject.SetActive(true); // Setting cost bar to true
-                    towerCards[i].GetComponent<Image>().color = disabledColor; //Applying dull color to unpurchased item
+                    if(tower.canBuy)
+                    {
+                        towerCards[i].GetComponent<Animator>().SetBool("canBuy", true);
+                        towerCards[i].transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        towerCards[i].GetComponent<Animator>().SetBool("canBuy", false);
+                        towerCards[i].transform.GetChild(1).gameObject.SetActive(true);
+                    }
 
                 }
             }
@@ -90,13 +99,23 @@ public class GamePlayUI : MonoBehaviour
             if(tower.isPurchased)
             {
                 towerCards[id].transform.GetChild(0).gameObject.SetActive(false);
-                towerCards[id].GetComponent<Image>().color = new Color(255, 255, 255, 255);
+                //towerCards[id].GetComponent<Image>().color = new Color(255, 255, 255, 255);
                 towerCards[id].GetComponent<Animator>().SetBool("isPurchased", true);
             }
             else
             {
-                towerCards[id].transform.GetChild(0).gameObject.SetActive(true);
-                towerCards[id].GetComponent<Image>().color = disabledColor;
+                if (tower.canBuy)
+                {
+                    towerCards[id].GetComponent<Animator>().SetBool("canBuy", true);
+                    towerCards[id].transform.GetChild(0).gameObject.SetActive(true);
+                    towerCards[id].transform.GetChild(1).gameObject.SetActive(false);
+                }
+                else
+                {
+                    towerCards[id].GetComponent<Animator>().SetBool("canBuy", false);
+                    towerCards[id].transform.GetChild(1).gameObject.SetActive(true);
+                    towerCards[id].transform.GetChild(0).gameObject.SetActive(false);
+                }
                 towerCards[id].GetComponent<Animator>().SetBool("isPurchased", false);
             }
 

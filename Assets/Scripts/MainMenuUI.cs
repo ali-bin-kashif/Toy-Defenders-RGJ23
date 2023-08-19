@@ -12,6 +12,8 @@ public class MainMenuUI : MonoBehaviour
     public GameObject InfoPanel;
     public GameObject ShopPanel;
 
+    public GameObject fadePanel;
+
     public TextMeshProUGUI coinsHUD;
 
     public int Coins;
@@ -72,8 +74,15 @@ public class MainMenuUI : MonoBehaviour
         MainMenuPanel.SetActive(true);
     }
 
-    public void SelectLevel(int index)
+    public IEnumerator SelectLevel(int index)
     {
+        fadePanel.GetComponent<Animator>().SetTrigger("FadeIn");
+        yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(index);
+    }
+
+    public void LevelButton(int index)
+    {
+        StartCoroutine(SelectLevel(index));
     }
 }
