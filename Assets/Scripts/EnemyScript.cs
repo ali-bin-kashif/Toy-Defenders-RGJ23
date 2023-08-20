@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
+    public AudioSource death;
     public float Health;
 
     Animator _enemyAnimator;
@@ -25,8 +26,9 @@ public class EnemyScript : MonoBehaviour
         _enemyAnimator = GetComponent<Animator>();
         movement = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-
+        death = GetComponent<AudioSource>();
         healthBar.SetMaxHealth(Health);
+        
 
     }
 
@@ -35,14 +37,19 @@ public class EnemyScript : MonoBehaviour
     {
         if(Health <= 0 && !hasDied)
         {
+           
             Health = 0;
             StartCoroutine(healthBar.ShowHealthBar());
             hasDied = true;
+            death.Play();
             movement.enabled = false;
             _playerInventory.Coins += 40;
             _playerInventory.CheckBuyCriteria();
             if (_enemyAnimator != null)
                 _enemyAnimator.SetTrigger("Die");
+
+               
+
 
             Destroy(gameObject,1f);
 

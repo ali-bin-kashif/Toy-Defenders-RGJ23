@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    
+    public AudioSource explode;
     Rigidbody Bullet;
     public float Damage;
     // Start is called before the first frame update
@@ -22,9 +22,12 @@ public class BulletScript : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        
         if(collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<EnemyScript>().TakeDamage(Damage);
+            //make it collide with ground so the sound effect will work and area damage.
+           // explode.Play();
         }
     }
 }

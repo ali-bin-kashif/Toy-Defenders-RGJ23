@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GamePlayUI : MonoBehaviour
 {
+    public AudioSource audio;
+    public AudioSource uiAudio;
     public TextMeshProUGUI coinsText, bonusCoins;
 
     public Button[] towerCards;
@@ -101,6 +103,7 @@ public class GamePlayUI : MonoBehaviour
                 towerCards[id].transform.GetChild(0).gameObject.SetActive(false);
                 //towerCards[id].GetComponent<Image>().color = new Color(255, 255, 255, 255);
                 towerCards[id].GetComponent<Animator>().SetBool("isPurchased", true);
+                uiAudio.Play();
             }
             else
             {
@@ -139,6 +142,7 @@ public class GamePlayUI : MonoBehaviour
         coinHUD.SetActive(false);
         progressBar.gameObject.SetActive(false);
         pauseMenu.SetActive(true);
+        audio.Play();
     }
 
     public void ResumeButton()
@@ -148,18 +152,23 @@ public class GamePlayUI : MonoBehaviour
         pauseBtn.SetActive(true);
         coinHUD.SetActive(true);
         progressBar.gameObject.SetActive(true);
+        audio.Play();
         
     }
 
     public void RetryButton()
     {
+       // audio.Play();
         int index = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(index);
+        
     }
 
     public void GoToScene(int index)
     {
+       // audio.Play();
         SceneManager.LoadScene(index);
+        
     }
 
     IEnumerator GameLost()

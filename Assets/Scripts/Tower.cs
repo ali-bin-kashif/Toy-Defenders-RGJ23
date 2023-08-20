@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    public AudioSource bulletaudio;
+    public AudioSource audioturrent;
     public float towerRange;
     public float Damage;
     public float fireCoolDown;
@@ -23,6 +25,8 @@ public class Tower : MonoBehaviour
     void Start()
     {
         InvokeRepeating("SetEnemyTarget", 0f, 1f);
+        audioturrent = GetComponent<AudioSource>();
+        audioturrent.Play();
     }
 
 
@@ -89,6 +93,7 @@ public class Tower : MonoBehaviour
     void Shoot()
     {
         GameObject bullet = Instantiate(Bullet, firePoint.position, firePoint.rotation);
+        bulletaudio.Play();
         bullet.GetComponent<BulletScript>().Damage = Damage;
         bullet.GetComponent<Rigidbody>().AddForce(firePoint.forward * shootForce,ForceMode.Impulse);
     }

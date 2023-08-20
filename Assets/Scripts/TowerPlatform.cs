@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TowerPlatform : MonoBehaviour
 {
+    
 
     Transform _spawnPoint;
 
@@ -17,6 +18,7 @@ public class TowerPlatform : MonoBehaviour
         _spawnPoint = transform.GetChild(0); //Get the spawn point transform which is child
 
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
+        
     }
 
     private void OnMouseDown()
@@ -24,6 +26,10 @@ public class TowerPlatform : MonoBehaviour
         if(!hasTower)
         {
             hasTower = _playerInventory.SummonTower(_spawnPoint);
+            
+            
+
+            
         } 
     }
 
