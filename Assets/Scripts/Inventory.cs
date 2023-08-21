@@ -29,7 +29,8 @@ public class Inventory : MonoBehaviour
 
     bool isSelection;
 
-    private void Awake()
+
+    private void Start()
     {
         CheckBuyCriteria();
     }
@@ -59,68 +60,26 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    //Tower selection functions, will be executed when tap on cards
-    public void SelectTurret()
+    //Tower selection function, will be executed when tap on cards
+
+    public void SelectTower(int index)
     {
         UnselectTowers();
-        ToyTower tower = toyTowers[0];
-        if (tower.isUnlocked) 
-        {
-            if (!tower.isPurchased && Coins >= tower.towerCost)
-            {
-                tower.isPurchased = true;
-                Coins -= tower.towerCost;
-                CheckBuyCriteria();
-            }
-            else
-            {
-                _selectedTower = 0;
-                tower.isSelected = true;
-                isSelection = true;
-            }
-                
-        }  
-
-    }
-
-    public void SelectCannon()
-    {
-        UnselectTowers();
-        ToyTower tower = toyTowers[1];
+        ToyTower tower = toyTowers[index];
         if (tower.isUnlocked)
         {
             if (!tower.isPurchased && Coins >= tower.towerCost)
             {
                 tower.isPurchased = true;
+                gameUI.uiAudio.PlayOneShot(gameUI.purchaseTower);
                 Coins -= tower.towerCost;
                 CheckBuyCriteria();
             }
             else
             {
-                _selectedTower = 1;
+                _selectedTower = index;
                 tower.isSelected = true;
-                isSelection = true;
-            }
-
-        }
-    }
-
-    public void SelectMortar()
-    {
-        UnselectTowers();
-        ToyTower tower = toyTowers[2];
-        if (tower.isUnlocked)
-        {
-            if (!tower.isPurchased && Coins >= tower.towerCost)
-            {
-                tower.isPurchased = true;
-                Coins -= tower.towerCost;
-                CheckBuyCriteria();
-            }
-            else
-            {
-                _selectedTower = 2;
-                tower.isSelected = true;
+                gameUI.uiAudio.PlayOneShot(gameUI.deckTap);
                 isSelection = true;
             }
 
@@ -139,16 +98,18 @@ public class Inventory : MonoBehaviour
 
     public void CheckBuyCriteria()
     {
-        foreach(ToyTower tower in toyTowers)
+        for(int i=0 ; i < toyTowers.Length ; i++)
         {
+            ToyTower tower = toyTowers[i];
             if(Coins >= tower.towerCost)
             {
-                tower.canBuy = true;
+                tower.canBuy = true; 
             }
             else
             {
                 tower.canBuy = false;
             }
+            gameUI.UpdateDeckUI(i);
         }
     }
 }

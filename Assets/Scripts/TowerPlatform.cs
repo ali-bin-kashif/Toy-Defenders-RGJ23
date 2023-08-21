@@ -13,6 +13,7 @@ public class TowerPlatform : MonoBehaviour
 
     bool hasTower = false;
 
+
     void Start()
     {
         _spawnPoint = transform.GetChild(0); //Get the spawn point transform which is child
@@ -25,11 +26,7 @@ public class TowerPlatform : MonoBehaviour
     {
         if(!hasTower)
         {
-            hasTower = _playerInventory.SummonTower(_spawnPoint);
-            
-            
-
-            
+            hasTower = _playerInventory.SummonTower(_spawnPoint); 
         } 
     }
 

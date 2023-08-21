@@ -7,8 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class GamePlayUI : MonoBehaviour
 {
-    public AudioSource audio;
-    public AudioSource uiAudio;
     public TextMeshProUGUI coinsText, bonusCoins;
 
     public Button[] towerCards;
@@ -31,16 +29,23 @@ public class GamePlayUI : MonoBehaviour
 
     bool runOnce;
 
+    public AudioSource uiAudio;
+    public AudioClip buttonTap, purchaseTower, deckTap, gameWin, gameLoss;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
+
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
+        uiAudio = GetComponent<AudioSource>();
 
         pauseMenu.SetActive(false);
         winMenu.SetActive(false);
         lossMenu.SetActive(false);
+
 
         //Setting the UI of deck according to the inventory and available towers
         for (int i = 0; i < _playerInventory.toyTowers.Length; i++)
@@ -96,6 +101,7 @@ public class GamePlayUI : MonoBehaviour
     public void UpdateDeckUI(int id)
     {
         ToyTower tower = _playerInventory.toyTowers[id];
+        
         if (tower.isUnlocked)
         {
             if(tower.isPurchased)
@@ -142,7 +148,7 @@ public class GamePlayUI : MonoBehaviour
         coinHUD.SetActive(false);
         progressBar.gameObject.SetActive(false);
         pauseMenu.SetActive(true);
-        audio.Play();
+        uiAudio.PlayOneShot(buttonTap);
     }
 
     public void ResumeButton()
@@ -152,8 +158,8 @@ public class GamePlayUI : MonoBehaviour
         pauseBtn.SetActive(true);
         coinHUD.SetActive(true);
         progressBar.gameObject.SetActive(true);
-        audio.Play();
-        
+        uiAudio.PlayOneShot(buttonTap);
+
     }
 
     public void RetryButton()
@@ -173,6 +179,7 @@ public class GamePlayUI : MonoBehaviour
 
     IEnumerator GameLost()
     {
+        uiAudio.PlayOneShot(gameLoss);
         pauseBtn.SetActive(false);
         coinHUD.SetActive(false);
         progressBar.gameObject.SetActive(false);
@@ -187,14 +194,15 @@ public class GamePlayUI : MonoBehaviour
         pauseBtn.SetActive(false);
         coinHUD.SetActive(false);
         progressBar.GetComponent<Animator>().SetTrigger("Win");
+        uiAudio.PlayOneShot(gameWin);
         Deck.SetTrigger("DeckEnd");
-        yield return new WaitForSeconds(3f);
+
+        yield return new WaitForSeconds(2f);
         bonusCoins.text = _playerInventory.Coins.ToString();
         progressBar.gameObject.SetActive(false);
         Deck.gameObject.SetActive(false);
         winMenu.SetActive(true);
     }
-
 
 
 

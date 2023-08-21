@@ -345,7 +345,6 @@ GameObject:
   - component: {fileID: 5058693945966971305}
   - component: {fileID: 8275420917523322787}
   - component: {fileID: 447466612444835287}
-  - component: {fileID: 7467166153747141229}
   - component: {fileID: 4172630614620197034}
   m_Layer: 0
   m_Name: Toy-Turret
@@ -383,16 +382,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b158dea7cb0c7ab4ba6fb056c2921eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletaudio: {fileID: 4172630614620197034}
-  audioturrent: {fileID: 7467166153747141229}
   towerRange: 3
   Damage: 25
   fireCoolDown: 1
   shootForce: 10
   isMortar: 0
+  isHumanoid: 0
   turretBarrel: {fileID: 4570161058705503636}
   firePoint: {fileID: 3385179123108033023}
-  Bullet: {fileID: 5060781489523900721, guid: ecb4111e1072b7c448de4ce62f892fdc, type: 3}
+  Bullet: {fileID: 419947846588090674, guid: 46edad20d0273b34599544fc0ddcbd0b, type: 3}
+  bulletShot: {fileID: 8300000, guid: 3756e0a44d84867498a1284f360eab0d, type: 3}
+  towerPlace: {fileID: 8300000, guid: 28a44e4330d31eb4e841cb06b03103e9, type: 3}
 --- !u!54 &8275420917523322787
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -439,104 +439,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 5, z: 0}
---- !u!82 &7467166153747141229
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3677155343898032432}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 28a44e4330d31eb4e841cb06b03103e9, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0.4
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_Size: {x: 10, y: 5, z: 10}
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!82 &4172630614620197034
 AudioSource:
   m_ObjectHideFlags: 0
@@ -547,9 +451,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 3756e0a44d84867498a1284f360eab0d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.9
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -744,7 +648,7 @@ Transform:
   m_GameObject: {fileID: 8237167086579349459}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.2148333, z: 6.1300006}
+  m_LocalPosition: {x: 0, y: 5.2148333, z: 7.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

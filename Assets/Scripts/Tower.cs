@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    public AudioSource bulletaudio;
-    public AudioSource audioturrent;
+    
     public float towerRange;
     public float Damage;
     public float fireCoolDown;
     public float shootForce;
-    public bool isMortar;
+    public bool isMortar, isHumanoid;
     float _fireTime;
 
     public Transform turretBarrel;
@@ -18,15 +17,19 @@ public class Tower : MonoBehaviour
     public GameObject Bullet;
 
     Transform _enemyTarget;
+    AudioSource towerAudio;
+
+    public AudioClip bulletShot, towerPlace;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SetEnemyTarget", 0f, 1f);
-        audioturrent = GetComponent<AudioSource>();
-        audioturrent.Play();
+        InvokeRepeating("SetEnemyTarget", 0f, 0.5f);
+        towerAudio = GetComponent<AudioSource>();
+        towerAudio.PlayOneShot(towerPlace);
+
     }
 
 
@@ -43,6 +46,11 @@ public class Tower : MonoBehaviour
             if(isMortar)
             {
                 turretBarrel.rotation = Quaternion.Euler(-65f, rotate.y, 0f);
+            }
+            else if(isHumanoid)
+            {
+                turretBarrel.rotation = Quaternion.Euler(0f, rotate.y, 0f);
+                firePoint.rotation = Quaternion.Euler(rotate.x, rotate.y, 0f);
             }
             else
             {
@@ -72,7 +80,7 @@ public class Tower : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             float distance = Vector3.Distance(enemy.transform.position, transform.position);
-            if (distance < shortestDistance)
+            if (distance < shortestDistance && !enemy.GetComponent<EnemyScript>().hasDied)
             {
                 shortestDistance = distance;
                 nearestEnemy = enemy.transform;
@@ -93,8 +101,15 @@ public class Tower : MonoBehaviour
     void Shoot()
     {
         GameObject bullet = Instantiate(Bullet, firePoint.position, firePoint.rotation);
-        bulletaudio.Play();
-        bullet.GetComponent<BulletScript>().Damage = Damage;
+        towerAudio.PlayOneShot(bulletShot);
+        if(isMortar)
+        {
+            bullet.GetComponent<Bomb>().Damage = Damage;
+        }
+        else
+        {
+            bullet.GetComponent<BulletScript>().Damage = Damage;
+        }
         bullet.GetComponent<Rigidbody>().AddForce(firePoint.forward * shootForce,ForceMode.Impulse);
     }
 

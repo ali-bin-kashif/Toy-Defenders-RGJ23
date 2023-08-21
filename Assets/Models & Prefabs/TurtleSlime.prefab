@@ -877,7 +877,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   death: {fileID: -5705014949404970830}
   Health: 150
+  _enemyAnimator: {fileID: 571713538400179143}
   healthBar: {fileID: 4544018712229394219}
+  hasDied: 0
 --- !u!82 &-5705014949404970830
 AudioSource:
   m_ObjectHideFlags: 0

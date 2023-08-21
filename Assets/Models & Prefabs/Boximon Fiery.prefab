@@ -1318,7 +1318,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   death: {fileID: 508145449278166950}
   Health: 200
+  _enemyAnimator: {fileID: 1292678748230951130}
   healthBar: {fileID: 217673728592609287}
+  hasDied: 0
 --- !u!82 &508145449278166950
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1326,7 +1328,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5393065416410693806}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 12502b7fe7b36c943a44e7c0d9ec907d, type: 3}

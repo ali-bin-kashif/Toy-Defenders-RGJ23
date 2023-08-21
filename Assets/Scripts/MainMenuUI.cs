@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuUI : MonoBehaviour
 {
-    public AudioSource audio;
+    public AudioSource Audio;
     public GameObject MainMenuPanel;
     public GameObject LevelSelectPanel;
     public GameObject SettingPanel;
@@ -22,7 +22,8 @@ public class MainMenuUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audio = GetComponent<AudioSource>();
+        Application.targetFrameRate = 60;
+        Audio = GetComponent<AudioSource>();
         Coins = PlayerPrefs.GetInt("Coins", 1000);
         coinsHUD.text = Coins.ToString();
 
@@ -40,7 +41,7 @@ public class MainMenuUI : MonoBehaviour
     {
         MainMenuPanel.SetActive(false);
         LevelSelectPanel.SetActive(true);
-        audio.Play();
+        Audio.Play();
     }
 
     public void ShopButton()
@@ -48,7 +49,7 @@ public class MainMenuUI : MonoBehaviour
         ShopPanel.SetActive(true);
         InfoPanel.SetActive(false);
         SettingPanel.SetActive(false);
-        audio.Play();
+        Audio.Play();
     }
 
     public void InfoButton()
@@ -56,7 +57,7 @@ public class MainMenuUI : MonoBehaviour
         InfoPanel.SetActive(true);
         ShopPanel.SetActive(false);
         SettingPanel.SetActive(false);
-        audio.Play();
+        Audio.Play();
     }
 
     public void SettingButton()
@@ -64,7 +65,7 @@ public class MainMenuUI : MonoBehaviour
         SettingPanel.SetActive(true);
         ShopPanel.SetActive(false);
         InfoPanel.SetActive(false);
-        audio.Play();
+        Audio.Play();
     }
 
     public void CloseButton()
@@ -72,18 +73,19 @@ public class MainMenuUI : MonoBehaviour
         SettingPanel.SetActive(false);
         ShopPanel.SetActive(false);
         InfoPanel.SetActive(false);
-        audio.Play();
+        Audio.Play();
     }
 
     public void BackButton()
     {
         LevelSelectPanel.SetActive(false);
         MainMenuPanel.SetActive(true);
-        audio.Play();
+        Audio.Play();
     }
 
     public IEnumerator SelectLevel(int index)
     {
+        Audio.Play();
         fadePanel.GetComponent<Animator>().SetTrigger("FadeIn");
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(index);

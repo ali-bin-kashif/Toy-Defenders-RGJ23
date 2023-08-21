@@ -9,7 +9,7 @@ public class EnemyScript : MonoBehaviour
     public AudioSource death;
     public float Health;
 
-    Animator _enemyAnimator;
+    public Animator _enemyAnimator;
     Inventory _playerInventory;
     NavMeshAgent movement;
     Rigidbody rb;
@@ -18,12 +18,12 @@ public class EnemyScript : MonoBehaviour
 
     bool isHealthShown;
     
-    bool hasDied;
+    public bool hasDied;
     // Start is called before the first frame update
     void Start()
     {
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
-        _enemyAnimator = GetComponent<Animator>();
+        //_enemyAnimator = GetComponent<Animator>();
         movement = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         death = GetComponent<AudioSource>();
@@ -45,13 +45,12 @@ public class EnemyScript : MonoBehaviour
             movement.enabled = false;
             _playerInventory.Coins += 40;
             _playerInventory.CheckBuyCriteria();
+
             if (_enemyAnimator != null)
                 _enemyAnimator.SetTrigger("Die");
 
-               
 
-
-            Destroy(gameObject,1f);
+            Destroy(gameObject,2f);
 
         }
         
