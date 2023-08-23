@@ -22,7 +22,6 @@ public class Tower : MonoBehaviour
     public AudioClip bulletShot, towerPlace;
 
 
-
     // Start is called before the first frame update
     void Start()
     {

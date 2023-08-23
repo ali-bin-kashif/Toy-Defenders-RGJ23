@@ -1,20 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 [System.Serializable]
 public class Enemy
 {
-    public string enemyName;
     public GameObject enemyPrefab; // Prefab of the enemy to be instantiated
     public int enemyCount;
+    public float enemyDelay;
 }
 
 [System.Serializable]
 public class Wave
 {
     public string waveName;
-    public string waveDescription;
+    public string waveText;
     public float spawnDelay;
     public Enemy[] Enemies;
 }
@@ -39,10 +40,16 @@ public class EnemySpawner : MonoBehaviour
 
     public float percentageComplete;
 
+    public GamePlayUI gameUI;
+
+    public TextMeshProUGUI waveText;
+
     void Start()
     {
+
         state = SpawnState.COUNTING;
- 
+        StartCoroutine(DisplayWaveText());
+
     }
 
     void Update()
@@ -89,10 +96,13 @@ public class EnemySpawner : MonoBehaviour
                 {
                     Instantiate(enemy.enemyPrefab, spawnPoint.position, Quaternion.identity);
                     percentageComplete += 2;
-                    yield return new WaitForSeconds(_wave.spawnDelay);
+                    yield return new WaitForSeconds(enemy.enemyDelay);
+
                 }  
             }
-                 
+            yield return new WaitForSeconds(_wave.spawnDelay);
+
+
         }
 
         state = SpawnState.WAITING;
@@ -127,13 +137,21 @@ public class EnemySpawner : MonoBehaviour
         }
         else
         {
-            
+            waveText.text = waves[currentWave].waveText;
+            StartCoroutine(DisplayWaveText());
             currentWave++;
             percentageComplete = ((float)currentWave / waves.Length) * 100;
             waveCountDown = 5;
             state = SpawnState.COUNTING;
         }
 
+    }
+
+    IEnumerator DisplayWaveText()
+    {
+        waveText.GetComponent<Animator>().SetTrigger("WaveText");
+        yield return new WaitForSeconds(0.75f);
+        gameUI.uiAudio.PlayOneShot(gameUI.panelSwipe);
     }
 
 

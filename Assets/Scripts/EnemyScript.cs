@@ -41,9 +41,10 @@ public class EnemyScript : MonoBehaviour
             Health = 0;
             StartCoroutine(healthBar.ShowHealthBar());
             hasDied = true;
-            death.Play();
+            //death.Play();
             movement.enabled = false;
             _playerInventory.Coins += 40;
+            _playerInventory.gameUI.CoinsUpdate(40, '+');
             _playerInventory.CheckBuyCriteria();
 
             if (_enemyAnimator != null)
@@ -61,7 +62,8 @@ public class EnemyScript : MonoBehaviour
         Health -= damage;
         healthBar.SetHealth(Health);
         _playerInventory.Coins += 5;
-        if(!isHealthShown)
+        _playerInventory.gameUI.CoinsUpdate(5, '+');
+        if (!isHealthShown)
         {
             isHealthShown = true;
             StartCoroutine(healthBar.ShowHealthBar());

@@ -21,7 +21,9 @@ public class Inventory : MonoBehaviour
 
     public ToyTower[] toyTowers;
 
-    public int Coins;
+    public TowerPlatform[] Platforms;
+
+    public int Coins, towerCount, platformCount;
 
     int _selectedTower;
 
@@ -53,7 +55,10 @@ public class Inventory : MonoBehaviour
             Instantiate(tower.towerPrefab, spawnpoint.position, tower.towerPrefab.transform.rotation);
             tower.isPurchased = false;
             UnselectTowers();
+    
+            towerCount++;
             gameUI.UpdateDeckUI(_selectedTower);
+            
             return true;
         }
         UnselectTowers();
@@ -73,6 +78,7 @@ public class Inventory : MonoBehaviour
                 tower.isPurchased = true;
                 gameUI.uiAudio.PlayOneShot(gameUI.purchaseTower);
                 Coins -= tower.towerCost;
+                gameUI.CoinsUpdate(tower.towerCost,'-');
                 CheckBuyCriteria();
             }
             else

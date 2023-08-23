@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class GamePlayUI : MonoBehaviour
 {
-    public TextMeshProUGUI coinsText, bonusCoins;
+    public TextMeshProUGUI coinsText, bonusCoins, updateCoins;
 
     public Button[] towerCards;
 
@@ -21,7 +21,7 @@ public class GamePlayUI : MonoBehaviour
 
     public Color disabledColor;
 
-    public Animator Deck;
+    public Animator Deck, coinsHUDAnim;
 
     public EnemySpawner _waveSystem;
 
@@ -30,7 +30,7 @@ public class GamePlayUI : MonoBehaviour
     bool runOnce;
 
     public AudioSource uiAudio;
-    public AudioClip buttonTap, purchaseTower, deckTap, gameWin, gameLoss;
+    public AudioClip buttonTap, purchaseTower, deckTap, gameWin, gameLoss, panelSwipe;
 
 
 
@@ -45,6 +45,8 @@ public class GamePlayUI : MonoBehaviour
         pauseMenu.SetActive(false);
         winMenu.SetActive(false);
         lossMenu.SetActive(false);
+
+        coinsText.text = _playerInventory.Coins.ToString();
 
 
         //Setting the UI of deck according to the inventory and available towers
@@ -79,8 +81,6 @@ public class GamePlayUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //To update coins value of coin HUD
-        coinsText.text = _playerInventory.Coins.ToString();
 
         progressBar.value = _waveSystem.percentageComplete;
 
@@ -100,6 +100,17 @@ public class GamePlayUI : MonoBehaviour
 
     public void UpdateDeckUI(int id)
     {
+
+        if(_playerInventory.towerCount == _playerInventory.platformCount)
+        {
+            foreach(Button card in towerCards)
+            {
+                card.GetComponent<Animator>().SetBool("canBuy", false);
+                card.transform.GetChild(1).gameObject.SetActive(false);
+                card.transform.GetChild(0).gameObject.SetActive(false);
+            }
+            return;
+        }
         ToyTower tower = _playerInventory.toyTowers[id];
         
         if (tower.isUnlocked)
@@ -186,6 +197,7 @@ public class GamePlayUI : MonoBehaviour
         Deck.SetTrigger("DeckEnd");
         yield return new WaitForSeconds(1f);
         Deck.gameObject.SetActive(false);
+        uiAudio.PlayOneShot(panelSwipe);
         lossMenu.SetActive(true);
     }
 
@@ -201,7 +213,16 @@ public class GamePlayUI : MonoBehaviour
         bonusCoins.text = _playerInventory.Coins.ToString();
         progressBar.gameObject.SetActive(false);
         Deck.gameObject.SetActive(false);
+        uiAudio.PlayOneShot(panelSwipe);
         winMenu.SetActive(true);
+    }
+
+    public void CoinsUpdate(int coins, char sign)
+    {
+        updateCoins.text = sign + coins.ToString();
+        coinsHUDAnim.SetTrigger("CoinsUpdate");
+        //To update coins value of coin HUD
+        coinsText.text = _playerInventory.Coins.ToString();
     }
 
 

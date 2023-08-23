@@ -13,12 +13,14 @@ public class TowerPlatform : MonoBehaviour
 
     bool hasTower = false;
 
+    Animator towerHUD;
 
     void Start()
     {
         _spawnPoint = transform.GetChild(0); //Get the spawn point transform which is child
 
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
+        towerHUD = GetComponent<Animator>();
         
     }
 
@@ -26,8 +28,9 @@ public class TowerPlatform : MonoBehaviour
     {
         if(!hasTower)
         {
-            hasTower = _playerInventory.SummonTower(_spawnPoint); 
-        } 
+            hasTower = _playerInventory.SummonTower(_spawnPoint);
+            towerHUD.SetBool("isPlaced", true);
+        }
     }
 
 

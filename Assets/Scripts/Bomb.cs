@@ -11,6 +11,7 @@ public class Bomb : MonoBehaviour
     public GameObject explosionEffect;
 
     EnemyScript[] enemies;
+    bool hasExploded;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +26,7 @@ public class Bomb : MonoBehaviour
 
     void Explode()
     {
+        hasExploded = true;
         bombSound.Play();
         GetComponent<MeshRenderer>().enabled = false;
         enemies = GameObject.FindObjectsOfType<EnemyScript>();
@@ -49,6 +51,10 @@ public class Bomb : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Explode();
+        if(!hasExploded)
+        {
+            Explode();
+        }
+        
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
@@ -17,14 +18,34 @@ public class MainMenuUI : MonoBehaviour
 
     public TextMeshProUGUI coinsHUD;
 
+    public Button musicToggle;
+    public Sprite musicOn, musicOff;
+    public AudioSource gameMusic;
+    public AudioClip toggleSound;
+
     public int Coins;
+    int musicEnable;
 
     // Start is called before the first frame update
     void Start()
     {
+        //PlayerPrefs.DeleteAll();
         Application.targetFrameRate = 60;
         Audio = GetComponent<AudioSource>();
+
         Coins = PlayerPrefs.GetInt("Coins", 1000);
+        musicEnable = PlayerPrefs.GetInt("Music", 1);
+        if(musicEnable == 1) //Here 1 means true(On)
+        {
+            musicToggle.GetComponent<Image>().sprite = musicOn;
+            gameMusic.Play();
+        }
+        else
+        {
+            musicToggle.GetComponent<Image>().sprite = musicOff;
+        }
+        
+
         coinsHUD.text = Coins.ToString();
 
         Time.timeScale = 1;
@@ -94,5 +115,25 @@ public class MainMenuUI : MonoBehaviour
     public void LevelButton(int index)
     {
         StartCoroutine(SelectLevel(index));
+    }
+
+    public void MusicToggle()
+    {
+        Audio.PlayOneShot(toggleSound,0.5f);
+        if (musicEnable == 1)
+        {
+            musicEnable = 0;
+            PlayerPrefs.SetInt("Music", musicEnable);
+            musicToggle.GetComponent<Image>().sprite = musicOff;
+            gameMusic.Stop();
+        }
+        else
+        {
+            musicEnable = 1;
+            PlayerPrefs.SetInt("Music", musicEnable);
+            musicToggle.GetComponent<Image>().sprite = musicOn;
+            gameMusic.Play();
+        }
+        
     }
 }

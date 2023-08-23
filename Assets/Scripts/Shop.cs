@@ -32,6 +32,7 @@ public class Shop : MonoBehaviour
     public TextMeshProUGUI coinsHUD;
 
     public AudioSource Audio;
+    public AudioClip shopButton, purchaseSound;
 
 
     // Start is called before the first frame update
@@ -107,7 +108,7 @@ public class Shop : MonoBehaviour
         {
             itemSelected--;
             UpdateShopUI();
-            Audio.Play();
+            Audio.PlayOneShot(shopButton);
         }
 
     }
@@ -118,7 +119,7 @@ public class Shop : MonoBehaviour
         {
             itemSelected++;
             UpdateShopUI();
-            Audio.Play();
+            Audio.PlayOneShot(shopButton);
         }
 
     }
@@ -127,7 +128,7 @@ public class Shop : MonoBehaviour
     {
         if(mainMenu.Coins >= shopItems[itemSelected].Cost)
         {
-
+            Audio.PlayOneShot(purchaseSound,1f);
             shopItems[itemSelected].isOwned = true;
             UpdateShopUI();
             mainMenu.Coins -= shopItems[itemSelected].Cost;
