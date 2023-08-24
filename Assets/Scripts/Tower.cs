@@ -41,7 +41,7 @@ public class Tower : MonoBehaviour
 
             Quaternion lookTarget = Quaternion.LookRotation(dir);
 
-            Vector3 rotate = Quaternion.Lerp(turretBarrel.rotation, lookTarget, 15 * Time.deltaTime).eulerAngles;
+            Vector3 rotate = Quaternion.Lerp(turretBarrel.rotation, lookTarget, 20 * Time.deltaTime).eulerAngles;
             if(isMortar)
             {
                 turretBarrel.rotation = Quaternion.Euler(-65f, rotate.y, 0f);

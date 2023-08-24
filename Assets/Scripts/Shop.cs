@@ -34,11 +34,18 @@ public class Shop : MonoBehaviour
     public AudioSource Audio;
     public AudioClip shopButton, purchaseSound;
 
+    //Values to save status for tower cards ( 0 - False, 1 - True) using int since player prefabs doesn't have bool property
+    int cannonStatus, mortarStatus, plasmaStatus;
+
 
     // Start is called before the first frame update
     void Start()
     {
         itemSelected = 0;
+        cannonStatus = PlayerPrefs.GetInt("Cannon", 0);
+        mortarStatus = PlayerPrefs.GetInt("Mortar", 0);
+        plasmaStatus = PlayerPrefs.GetInt("Plasma", 0);
+
         towerCard.sprite = shopItems[itemSelected].itemImage;
         infoText.text = shopItems[itemSelected].itemInfo;
         towerCost.text = "FREE";
@@ -52,7 +59,23 @@ public class Shop : MonoBehaviour
             buyButton.interactable = true;
             buyText.text = "BUY";
         }
-        
+
+        if(cannonStatus == 1) //Here means true
+        {
+            shopItems[1].isOwned = true;
+        }
+
+        if (mortarStatus == 1) //Here means true
+        {
+            shopItems[2].isOwned = true;
+        }
+
+        if (plasmaStatus == 1) //Here means true
+        {
+            shopItems[3].isOwned = true;
+        }
+
+
     }
 
     void UpdateShopUI()
@@ -130,6 +153,21 @@ public class Shop : MonoBehaviour
         {
             Audio.PlayOneShot(purchaseSound,1f);
             shopItems[itemSelected].isOwned = true;
+
+            if(itemSelected == 1)
+            {
+                PlayerPrefs.SetInt("Cannon", 1);
+            }
+
+            if (itemSelected == 2)
+            {
+                PlayerPrefs.SetInt("Mortar", 1);
+            }
+
+            if (itemSelected == 3)
+            {
+                PlayerPrefs.SetInt("Plasma", 1);
+            }
             UpdateShopUI();
             mainMenu.Coins -= shopItems[itemSelected].Cost;
             PlayerPrefs.SetInt("Coins", mainMenu.Coins);

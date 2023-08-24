@@ -30,9 +30,15 @@ public class GamePlayUI : MonoBehaviour
     bool runOnce;
 
     public AudioSource uiAudio;
-    public AudioClip buttonTap, purchaseTower, deckTap, gameWin, gameLoss, panelSwipe;
+    public AudioClip buttonTap, purchaseTower, deckTap, gameWin, gameLoss, panelSwipe, doorOpen;
+
+    public float doorSoundDelay;
 
 
+    void DoorOpenSound()
+    {
+        uiAudio.PlayOneShot(doorOpen, 0.7f);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +82,9 @@ public class GamePlayUI : MonoBehaviour
                 towerCards[i].interactable = false;
             }
         }
+
+        //Playing door sound with a delay
+        Invoke("DoorOpenSound", doorSoundDelay);
     }
 
     // Update is called once per frame
@@ -181,6 +190,12 @@ public class GamePlayUI : MonoBehaviour
         
     }
 
+    public void NextLevelButton()
+    {
+        int index = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(index+1);
+    }
+
     public void GoToScene(int index)
     {
        // audio.Play();
@@ -215,6 +230,19 @@ public class GamePlayUI : MonoBehaviour
         Deck.gameObject.SetActive(false);
         uiAudio.PlayOneShot(panelSwipe);
         winMenu.SetActive(true);
+
+        //Save earned coins
+        int coins = PlayerPrefs.GetInt("Coins");
+        PlayerPrefs.SetInt("Coins", coins + _playerInventory.Coins);
+
+        //Unlock next level
+        int levels = PlayerPrefs.GetInt("UnlockedLevels");
+        int index = SceneManager.GetActiveScene().buildIndex;
+        if ( levels < ( index + 1 ) )
+        { 
+            PlayerPrefs.SetInt("UnlockedLevels", index + 1);
+        }
+        
     }
 
     public void CoinsUpdate(int coins, char sign)

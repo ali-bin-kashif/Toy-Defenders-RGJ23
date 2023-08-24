@@ -51,7 +51,7 @@ public class EnemyScript : MonoBehaviour
                 _enemyAnimator.SetTrigger("Die");
 
 
-            Destroy(gameObject,2f);
+            Destroy(gameObject,1f);
 
         }
         

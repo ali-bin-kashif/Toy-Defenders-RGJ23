@@ -11,16 +11,19 @@ public class LevelSelection : MonoBehaviour
     [SerializeField]
     int unlockedLevels;
 
-
+    private void Awake()
+    {
+        unlockedLevels = PlayerPrefs.GetInt("UnlockedLevels", 1);
+    }
     // Start is called before the first frame update
     void Start()
     {
-        unlockedLevels = PlayerPrefs.GetInt("UnlockedLevels", 0);
-        Debug.Log("Start" + unlockedLevels);
+        
+        //Debug.Log("Start" + unlockedLevels);
 
         for(int i=0; i < levelButtons.Length; i++)
         {
-            if(i <= unlockedLevels)
+            if(i <= unlockedLevels - 1)
             {
                 levelButtons[i].interactable = true;
             }
@@ -37,7 +40,7 @@ public class LevelSelection : MonoBehaviour
 
     private void OnEnable()
     {
-        levelButtons[unlockedLevels].GetComponent<Animator>().SetBool("isNextLevel", true);
+        levelButtons[unlockedLevels - 1].GetComponent<Animator>().SetBool("isNextLevel", true);
     }
 
 

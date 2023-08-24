@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerRange: 3
   Damage: 50
-  fireCoolDown: 2
+  fireCoolDown: 3
   shootForce: 5
   isMortar: 1
   isHumanoid: 0

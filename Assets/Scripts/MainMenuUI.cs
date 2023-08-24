@@ -31,9 +31,10 @@ public class MainMenuUI : MonoBehaviour
     {
         //PlayerPrefs.DeleteAll();
         Application.targetFrameRate = 60;
+
         Audio = GetComponent<AudioSource>();
 
-        Coins = PlayerPrefs.GetInt("Coins", 1000);
+        Coins = PlayerPrefs.GetInt("Coins", 0);
         musicEnable = PlayerPrefs.GetInt("Music", 1);
         if(musicEnable == 1) //Here 1 means true(On)
         {

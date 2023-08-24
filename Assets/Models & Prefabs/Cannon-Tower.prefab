@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerRange: 4
   Damage: 50
-  fireCoolDown: 3
+  fireCoolDown: 2
   shootForce: 10
   isMortar: 0
   isHumanoid: 0
@@ -191,8 +191,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8, y: 9.94, z: 8}
-  m_Center: {x: 0, y: 3.71, z: 0}
+  m_Size: {x: 8, y: 8, z: 8}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!82 &-7331032706272394917
 AudioSource:
   m_ObjectHideFlags: 0
@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 2042702885968965248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.015613854, y: 10.53, z: 3.13}
+  m_LocalPosition: {x: 0.015613854, y: 9.32, z: 3.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -400,7 +400,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0.88, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8808773158720402773}
@@ -513,7 +513,7 @@ Transform:
   m_GameObject: {fileID: 8876676625419808033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.03, z: 0}
+  m_LocalPosition: {x: 0, y: 9.64, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -596,7 +596,7 @@ Transform:
   m_GameObject: {fileID: 8985049584368353777}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 12.67, z: 0}
+  m_LocalPosition: {x: 0, y: 10.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
