@@ -1316,11 +1316,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3365e233fe7daa345a5798890d01d3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  death: {fileID: 508145449278166950}
   Health: 200
   _enemyAnimator: {fileID: 1292678748230951130}
   healthBar: {fileID: 217673728592609287}
   hasDied: 0
+  deathEffect: {fileID: 1503859245115456, guid: f912532b5710eb6429ad86a7083557cd,
+    type: 3}
+  enemySpawn: {fileID: 8300000, guid: 77dcf780b307a5747acbebb393aa6848, type: 3}
+  enemyDeath: {fileID: 8300000, guid: fefed42355bf6cc48a6338183cdefc53, type: 3}
 --- !u!82 &508145449278166950
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1328,10 +1331,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5393065416410693806}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 12502b7fe7b36c943a44e7c0d9ec907d, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.8
   m_Pitch: 1

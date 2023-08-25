@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
-    public AudioSource death;
+    
     public float Health;
 
     public Animator _enemyAnimator;
@@ -19,6 +19,12 @@ public class EnemyScript : MonoBehaviour
     bool isHealthShown;
     
     public bool hasDied;
+
+    AudioSource enemySound;
+
+    public GameObject deathEffect;
+
+    public AudioClip enemySpawn, enemyDeath;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +32,9 @@ public class EnemyScript : MonoBehaviour
         //_enemyAnimator = GetComponent<Animator>();
         movement = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
-        death = GetComponent<AudioSource>();
+        enemySound = GetComponent<AudioSource>();
         healthBar.SetMaxHealth(Health);
-        
-
+        enemySound.PlayOneShot(enemySpawn);
     }
 
     // Update is called once per frame
@@ -40,18 +45,15 @@ public class EnemyScript : MonoBehaviour
            
             Health = 0;
             StartCoroutine(healthBar.ShowHealthBar());
-            hasDied = true;
-            //death.Play();
-            movement.enabled = false;
+
+            StartCoroutine(Death());
+
             _playerInventory.Coins += 40;
             _playerInventory.gameUI.CoinsUpdate(40, '+');
             _playerInventory.CheckBuyCriteria();
 
             if (_enemyAnimator != null)
                 _enemyAnimator.SetTrigger("Die");
-
-
-            Destroy(gameObject,1f);
 
         }
         
@@ -70,6 +72,16 @@ public class EnemyScript : MonoBehaviour
             isHealthShown = false;
         }
         _playerInventory.CheckBuyCriteria();
+    }
+
+    IEnumerator Death()
+    {
+        hasDied = true;
+        enemySound.PlayOneShot(enemyDeath);
+        movement.enabled = false;
+        yield return new WaitForSeconds(1f);
+        Instantiate(deathEffect, transform.position, deathEffect.transform.rotation);
+        Destroy(gameObject);
     }
 
    

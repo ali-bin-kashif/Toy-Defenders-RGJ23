@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - EndTrigger
   - JumpTrigger
+  - Tower
   layers:
   - Default
   - TransparentFX

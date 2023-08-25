@@ -29,7 +29,7 @@ public class GamePlayUI : MonoBehaviour
 
     bool runOnce;
 
-    public AudioSource uiAudio;
+    public AudioSource uiAudio, gameMusic;
     public AudioClip buttonTap, purchaseTower, deckTap, gameWin, gameLoss, panelSwipe, doorOpen;
 
     public float doorSoundDelay;
@@ -44,6 +44,12 @@ public class GamePlayUI : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
+
+        int musicEnable = PlayerPrefs.GetInt("Music", 1);
+        if (musicEnable == 1) //Here 1 means true(On)
+        {
+            gameMusic.Play();
+        }
 
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
         uiAudio = GetComponent<AudioSource>();
@@ -61,11 +67,13 @@ public class GamePlayUI : MonoBehaviour
             ToyTower tower = _playerInventory.toyTowers[i];
             if (tower.isUnlocked)
             {
+                towerCards[i].GetComponent<Animator>().SetBool("isUnlocked", true);
                 towerCards[i].interactable = true;
                 if(!tower.isPurchased)
                 {
                     if(tower.canBuy)
                     {
+
                         towerCards[i].GetComponent<Animator>().SetBool("canBuy", true);
                         towerCards[i].transform.GetChild(0).gameObject.SetActive(true);
                     }

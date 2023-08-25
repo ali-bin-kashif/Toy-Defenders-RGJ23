@@ -33,5 +33,13 @@ public class TowerPlatform : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Tower"))
+        {
+            collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        }
+    }
+
 
 }

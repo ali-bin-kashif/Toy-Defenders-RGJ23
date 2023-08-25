@@ -31,8 +31,7 @@ public class Inventory : MonoBehaviour
 
     bool isSelection;
 
-
-    private void Start()
+    private void Awake()
     {
         //Values to get saved status for tower cards ( 0 - False, 1 - True) using int since player prefabs doesn't have bool property
         int cannonStatus, mortarStatus, plasmaStatus;
@@ -41,7 +40,7 @@ public class Inventory : MonoBehaviour
         mortarStatus = PlayerPrefs.GetInt("Mortar", 0);
         plasmaStatus = PlayerPrefs.GetInt("Plasma", 0);
 
-        if(cannonStatus == 1)
+        if (cannonStatus == 1)
         {
             toyTowers[1].isUnlocked = true;
         }
@@ -67,7 +66,10 @@ public class Inventory : MonoBehaviour
         {
             toyTowers[3].isUnlocked = false;
         }
+    }
 
+    private void Start()
+    {
         CheckBuyCriteria();
     }
     private void Update()
