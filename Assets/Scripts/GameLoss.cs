@@ -51,7 +51,8 @@ public class GameLoss : MonoBehaviour
 
                 Instantiate(DeathEffect, EffectPosition.position, DeathEffect.transform.rotation);
 
-                kidAnimation.SetTrigger("WakeUp");
+                if(kidAnimation != null)
+                    kidAnimation.SetTrigger("WakeUp");
             }
             
         }

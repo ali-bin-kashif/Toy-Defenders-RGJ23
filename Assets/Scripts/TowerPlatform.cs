@@ -15,6 +15,10 @@ public class TowerPlatform : MonoBehaviour
 
     Animator towerHUD;
 
+    public Tutorial gameTutorial;
+
+    int tutorialDone;
+
     void Start()
     {
         _spawnPoint = transform.GetChild(0); //Get the spawn point transform which is child
@@ -29,7 +33,6 @@ public class TowerPlatform : MonoBehaviour
         if(!hasTower)
         {
             hasTower = _playerInventory.SummonTower(_spawnPoint);
-            towerHUD.SetBool("isPlaced", true);
         }
     }
 
@@ -38,6 +41,17 @@ public class TowerPlatform : MonoBehaviour
         if(collision.gameObject.CompareTag("Tower"))
         {
             collision.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            towerHUD.SetBool("isPlaced", true);
+            
+            if(gameTutorial != null)
+            {
+                tutorialDone = PlayerPrefs.GetInt("TutorialComplete", 0);
+                if(tutorialDone == 0)
+                {
+                    gameTutorial.SecondStepComplete();
+                }
+                
+            }
         }
     }
 

@@ -23,7 +23,8 @@ public class LevelSelection : MonoBehaviour
 
         for(int i=0; i < levelButtons.Length; i++)
         {
-            if(i <= unlockedLevels - 1)
+            //levelButtons[i].transform.GetChild(0).gameObject.SetActive(false);
+            if (i <= unlockedLevels - 1)
             {
                 levelButtons[i].interactable = true;
             }
@@ -36,11 +37,18 @@ public class LevelSelection : MonoBehaviour
 
         
 
+        
+
     }
 
     private void OnEnable()
     {
         levelButtons[unlockedLevels - 1].GetComponent<Animator>().SetBool("isNextLevel", true);
+
+        for (int i = 0; i < unlockedLevels-1; i++)
+        {
+            levelButtons[i].transform.GetChild(0).gameObject.SetActive(true);
+        }
     }
 
 

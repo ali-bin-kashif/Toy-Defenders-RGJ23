@@ -75,6 +75,8 @@ public class Shop : MonoBehaviour
             shopItems[3].isOwned = true;
         }
 
+        
+
 
     }
 

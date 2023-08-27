@@ -30,15 +30,8 @@ public class GamePlayUI : MonoBehaviour
     bool runOnce;
 
     public AudioSource uiAudio, gameMusic;
-    public AudioClip buttonTap, purchaseTower, deckTap, gameWin, gameLoss, panelSwipe, doorOpen;
+    public AudioClip buttonTap, purchaseTower, deckTap, gameWin, gameLoss, panelSwipe;
 
-    public float doorSoundDelay;
-
-
-    void DoorOpenSound()
-    {
-        uiAudio.PlayOneShot(doorOpen, 0.7f);
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -90,9 +83,6 @@ public class GamePlayUI : MonoBehaviour
                 towerCards[i].interactable = false;
             }
         }
-
-        //Playing door sound with a delay
-        Invoke("DoorOpenSound", doorSoundDelay);
     }
 
     // Update is called once per frame

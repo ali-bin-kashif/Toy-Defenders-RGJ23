@@ -136,7 +136,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerRange: 4
   Damage: 50
-  fireCoolDown: 2
+  fireCoolDown: 1.5
   shootForce: 10
   isMortar: 0
   isHumanoid: 0
@@ -191,8 +191,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 8, y: 8, z: 8}
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Size: {x: 6.7785516, y: 5.7776103, z: 5.904988}
+  m_Center: {x: -0.014314481, y: 1.8888048, z: 0.1341956}
 --- !u!82 &-7331032706272394917
 AudioSource:
   m_ObjectHideFlags: 0

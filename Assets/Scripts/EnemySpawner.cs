@@ -25,7 +25,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public Wave[] waves;
 
-    public Transform spawnPoint;
+    public Transform[] spawnPoint;
 
     public float waveCountDown;
 
@@ -94,7 +94,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 if(wavesCompleted != true)
                 {
-                    Instantiate(enemy.enemyPrefab, spawnPoint.position, Quaternion.identity);
+                    Instantiate(enemy.enemyPrefab, spawnPoint[Random.Range(0,spawnPoint.Length)].position, Quaternion.identity);
                     percentageComplete += 2;
                     yield return new WaitForSeconds(enemy.enemyDelay);
 
@@ -141,7 +141,7 @@ public class EnemySpawner : MonoBehaviour
             StartCoroutine(DisplayWaveText());
             currentWave++;
             percentageComplete = ((float)currentWave / waves.Length) * 100;
-            waveCountDown = 5;
+            waveCountDown = 2.5f;
             state = SpawnState.COUNTING;
         }
 

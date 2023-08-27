@@ -23,6 +23,8 @@ public class MainMenuUI : MonoBehaviour
     public AudioSource gameMusic;
     public AudioClip toggleSound;
 
+    public Shop Shop;
+    public GameObject shopBtn;
     public int Coins;
     int musicEnable;
 
@@ -55,6 +57,15 @@ public class MainMenuUI : MonoBehaviour
         SettingPanel.SetActive(false);
         InfoPanel.SetActive(false);
         ShopPanel.SetActive(false);
+
+        foreach (ShopItem item in Shop.shopItems)
+        {
+            if (Coins >= item.Cost && !item.isOwned)
+            {
+                shopBtn.GetComponent<Animator>().SetBool("Alert", true);
+                shopBtn.transform.GetChild(0).gameObject.SetActive(true);
+            }
+        }
     }
 
 

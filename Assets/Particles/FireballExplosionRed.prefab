@@ -3889,7 +3889,7 @@ ParticleSystem:
       properties: 0
       emitProbability: 1
   LightsModule:
-    enabled: 1
+    enabled: 0
     ratio: 1
     light: {fileID: 108943164253918692, guid: faeb88c246231cb4aafcb2bc5b5b0427, type: 3}
     randomDistribution: 1
@@ -14710,11 +14710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aa5c1e37409a9344a344c0468db383d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabSound: {fileID: 1297775994297274, guid: 4dd3b5129e9b7704f9d8e1cfaf7ba718,
-    type: 3}
-  destroyWhenDone: 1
-  soundPrefabIsChild: 0
-  pitchRandomMultiplier: 1.4
 --- !u!1 &1782288969524710944
 GameObject:
   m_ObjectHideFlags: 0

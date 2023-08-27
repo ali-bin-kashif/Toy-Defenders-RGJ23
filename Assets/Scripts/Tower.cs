@@ -37,22 +37,36 @@ public class Tower : MonoBehaviour
     {
         if (_enemyTarget != null)
         {
-            Vector3 dir = _enemyTarget.position - turretBarrel.position;
-
-            Quaternion lookTarget = Quaternion.LookRotation(dir);
-
-            Vector3 rotate = Quaternion.Lerp(turretBarrel.rotation, lookTarget, 20 * Time.deltaTime).eulerAngles;
+            
             if(isMortar)
             {
+                Vector3 dir = _enemyTarget.position - turretBarrel.position;
+
+                Quaternion lookTarget = Quaternion.LookRotation(dir);
+
+                Vector3 rotate = Quaternion.Lerp(turretBarrel.rotation, lookTarget, 20 * Time.deltaTime).eulerAngles;
+
                 turretBarrel.rotation = Quaternion.Euler(-65f, rotate.y, 0f);
             }
             else if(isHumanoid)
             {
+                Vector3 dir = _enemyTarget.position - firePoint.position;
+
+                Quaternion lookTarget = Quaternion.LookRotation(dir);
+
+                Vector3 rotate = Quaternion.Lerp(firePoint.rotation, lookTarget, 20 * Time.deltaTime).eulerAngles;
+
                 turretBarrel.rotation = Quaternion.Euler(0f, rotate.y, 0f);
+                Debug.Log("Test");
                 firePoint.rotation = Quaternion.Euler(rotate.x, rotate.y, 0f);
             }
             else
             {
+                Vector3 dir = _enemyTarget.position - turretBarrel.position;
+
+                Quaternion lookTarget = Quaternion.LookRotation(dir);
+
+                Vector3 rotate = Quaternion.Lerp(turretBarrel.rotation, lookTarget, 20 * Time.deltaTime).eulerAngles;
                 turretBarrel.rotation = Quaternion.Euler(rotate.x, rotate.y, 0f);
             }
             

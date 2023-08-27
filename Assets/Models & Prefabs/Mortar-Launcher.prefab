@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b158dea7cb0c7ab4ba6fb056c2921eaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  towerRange: 3
+  towerRange: 4
   Damage: 50
   fireCoolDown: 3
   shootForce: 5

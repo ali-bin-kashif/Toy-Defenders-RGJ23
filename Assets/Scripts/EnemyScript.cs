@@ -8,6 +8,7 @@ public class EnemyScript : MonoBehaviour
 {
     
     public float Health;
+    public int damageReward, killReward;
 
     public Animator _enemyAnimator;
     Inventory _playerInventory;
@@ -29,12 +30,16 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         _playerInventory = GameObject.FindObjectOfType<Inventory>();
-        //_enemyAnimator = GetComponent<Animator>();
         movement = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         enemySound = GetComponent<AudioSource>();
         healthBar.SetMaxHealth(Health);
-        enemySound.PlayOneShot(enemySpawn);
+
+        if(enemySpawn != null)
+        {
+            enemySound.PlayOneShot(enemySpawn);
+        }
+        
     }
 
     // Update is called once per frame
@@ -48,8 +53,8 @@ public class EnemyScript : MonoBehaviour
 
             StartCoroutine(Death());
 
-            _playerInventory.Coins += 40;
-            _playerInventory.gameUI.CoinsUpdate(40, '+');
+            _playerInventory.Coins += killReward;
+            _playerInventory.gameUI.CoinsUpdate(killReward, '+');
             _playerInventory.CheckBuyCriteria();
 
             if (_enemyAnimator != null)
@@ -63,8 +68,8 @@ public class EnemyScript : MonoBehaviour
     {
         Health -= damage;
         healthBar.SetHealth(Health);
-        _playerInventory.Coins += 5;
-        _playerInventory.gameUI.CoinsUpdate(5, '+');
+        _playerInventory.Coins += damageReward;
+        _playerInventory.gameUI.CoinsUpdate(damageReward, '+');
         if (!isHealthShown)
         {
             isHealthShown = true;

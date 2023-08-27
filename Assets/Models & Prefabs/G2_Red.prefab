@@ -99,7 +99,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 1
+  m_Speed: 1.1
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -136,7 +136,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.7
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -233,12 +233,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Health: 50
+  damageReward: 5
+  killReward: 40
   _enemyAnimator: {fileID: 25901199926328580}
   healthBar: {fileID: 7806470226584494938}
   hasDied: 0
   deathEffect: {fileID: 1385251717090070, guid: cefd90ce7617769489753ab7a1373c2b,
     type: 3}
-  enemySpawn: {fileID: 8300000, guid: 04ca434f50b901e4dbba132db471ad89, type: 3}
+  enemySpawn: {fileID: 0}
   enemyDeath: {fileID: 8300000, guid: bb4d0239cc3739b4992ab506140231b2, type: 3}
 --- !u!1 &656418654785517845
 GameObject:
