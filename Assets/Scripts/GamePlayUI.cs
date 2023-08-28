@@ -15,7 +15,7 @@ public class GamePlayUI : MonoBehaviour
     public GameObject coinHUD,pauseBtn;
 
     //Screens and menus Game Objects
-    public GameObject pauseMenu, winMenu, lossMenu;
+    public GameObject pauseMenu, winMenu, lossMenu, notifyBar;
 
     public Slider progressBar;
 
@@ -50,6 +50,7 @@ public class GamePlayUI : MonoBehaviour
         pauseMenu.SetActive(false);
         winMenu.SetActive(false);
         lossMenu.SetActive(false);
+        notifyBar.SetActive(false);
 
         coinsText.text = _playerInventory.Coins.ToString();
 
@@ -240,7 +241,22 @@ public class GamePlayUI : MonoBehaviour
         { 
             PlayerPrefs.SetInt("UnlockedLevels", index + 1);
         }
+
+        int totalCoins = coins + _playerInventory.Coins;
+        int cannonStatus, mortarStatus, plasmaStatus;
+        cannonStatus = PlayerPrefs.GetInt("Cannon", 0);
+        mortarStatus = PlayerPrefs.GetInt("Mortar", 0);
+        plasmaStatus = PlayerPrefs.GetInt("Plasma", 0);
+
+        yield return new WaitForSeconds(0.5f);
+
+        if ( (totalCoins >= 1000 && cannonStatus == 0) || (totalCoins >= 1500 && mortarStatus == 0) || (totalCoins >= 2000 && plasmaStatus == 0))
+        {
+            notifyBar.SetActive(true);
+        }
         
+
+
     }
 
     public void CoinsUpdate(int coins, char sign)
